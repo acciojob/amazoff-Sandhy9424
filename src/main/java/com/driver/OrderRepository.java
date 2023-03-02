@@ -52,7 +52,11 @@ public class OrderRepository {
        return dpOrderPair.get(dpId).size();
    }
    List<String> ListOfOrdersToDp(String dpId){
-       return dpOrderPair.get(dpId);
+        List<String>ans=new ArrayList<>();
+        if(dpOrderPair.containsKey(dpId)) {
+            ans= dpOrderPair.get(dpId);
+        }
+        return ans;
    }
    List<String> ListOfAllOrdersToDp(){
        List<String>ans=new ArrayList<>(orderHashMap.keySet());
@@ -64,20 +68,24 @@ public class OrderRepository {
    int unDelivered(String time,String Partner){
        int n=(Integer.valueOf(time.substring(0,2))*60)+Integer.valueOf(time.substring(3));
        int ans=0;
-       for(String x:dpOrderPair.get(Partner)){
-           if(orderHashMap.get(x).getDeliveryTime()>n){
-               ans++;
+       if(dpOrderPair.containsKey(Partner)) {
+           for (String x : dpOrderPair.get(Partner)) {
+               if (orderHashMap.get(x).getDeliveryTime() > n) {
+                   ans++;
+               }
            }
        }
        return ans;
    }
-   String lastDelivery(String Partner){
-       int ans=0;
-       for(String x:dpOrderPair.get(Partner)){
-           if(orderHashMap.get(x).getDeliveryTime()>ans){
-               ans=orderHashMap.get(x).getDeliveryTime();
+   String lastDelivery(String Partner) {
+       int ans = 0;
+       if (dpOrderPair.containsKey(Partner)){
+           for (String x : dpOrderPair.get(Partner)) {
+               if (orderHashMap.get(x).getDeliveryTime() > ans) {
+                   ans = orderHashMap.get(x).getDeliveryTime();
+               }
            }
-       }
+   }
        int h=ans/60;
        int minute=ans%60;
        String hh=String.valueOf(h);
@@ -96,11 +104,15 @@ public class OrderRepository {
                 dpOrderMap.remove(id);
             }
         }
+        if(DPHashMap.containsKey(id))
        DPHashMap.remove(id);
+        if(dpOrderPair.containsKey(id))
        dpOrderPair.remove(id);
    }
    void DeleteOrder(String id){
+        if(orderHashMap.containsKey(id))
        orderHashMap.remove(id);
+        if(dpOrderMap.containsKey(id)&&dpOrderPair.containsKey(id))
        dpOrderPair.remove(dpOrderMap.get(id));
    }
 }

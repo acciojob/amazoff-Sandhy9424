@@ -24,7 +24,6 @@ public class OrderRepository {
        orderHashMap.put(order.getId(),order);
    }
    void addDp(String deliveryPartner){
-        if(!DPHashMap.containsKey(deliveryPartner))
        DPHashMap.put(deliveryPartner,new DeliveryPartner(deliveryPartner));
    }
    void orderDpPair(String orderId,String dpId){
@@ -48,7 +47,7 @@ public class OrderRepository {
    DeliveryPartner getDP(String dpId){
        return DPHashMap.get(dpId);
    }
-   int noOfOrdersToDp(String dpId){
+   Integer noOfOrdersToDp(String dpId){
        return dpOrderPair.get(dpId).size();
    }
    List<String> ListOfOrdersToDp(String dpId){
@@ -62,10 +61,10 @@ public class OrderRepository {
        List<String>ans=new ArrayList<>(orderHashMap.keySet());
        return ans;
    }
-   int noOfUAO(){
+   Integer noOfUAO(){
        return orderHashMap.size()-dpOrderMap.size();
    }
-   int unDelivered(String time,String Partner){
+   Integer unDelivered(String time,String Partner){
        int n=(Integer.valueOf(time.substring(0,2))*60)+Integer.valueOf(time.substring(3));
        int ans=0;
        if(dpOrderPair.containsKey(Partner)) {
@@ -113,6 +112,7 @@ public class OrderRepository {
         if(orderHashMap.containsKey(id))
        orderHashMap.remove(id);
         if(dpOrderMap.containsKey(id)&&dpOrderPair.containsKey(id))
-       dpOrderPair.remove(dpOrderMap.get(id));
+       dpOrderPair.get(dpOrderMap.get(id)).remove(id);
+        DPHashMap.get(dpOrderMap.get(id)).setNumberOfOrders(dpOrderPair.get(dpOrderMap.get(id)).size());
    }
 }

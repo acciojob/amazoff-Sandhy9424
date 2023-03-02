@@ -24,7 +24,7 @@ public class OrderService {
     DeliveryPartner getDP(String dpId){
         return orderRepository.getDP(dpId);
     }
-    int noOfOrdersToDp(String dpId){
+    Integer noOfOrdersToDp(String dpId){
         return orderRepository.noOfOrdersToDp(dpId);
     }
     List<String> ListOfOrdersToDp(String dpId){
@@ -33,10 +33,10 @@ public class OrderService {
     List<String> ListOfAllOrdersToDp(){
         return orderRepository.ListOfAllOrdersToDp();
     }
-    int noOfUAO(){
+    Integer noOfUAO(){
         return orderRepository.noOfUAO();
     }
-    int unDelivered(String time,String Partner){
+    Integer unDelivered(String time,String Partner){
         return unDelivered(time, Partner);
     }
     String lastDelivery(String Partner){

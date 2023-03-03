@@ -8,7 +8,7 @@ import java.util.List;
 @Service
 public class OrderService {
     @Autowired
-    OrderRepository orderRepository;
+    OrderRepository orderRepository=new OrderRepository();
     void addOrder(Order order){
         orderRepository.addOrder(order);
     }
@@ -37,7 +37,7 @@ public class OrderService {
         return orderRepository.noOfUAO();
     }
     Integer unDelivered(String time,String Partner){
-        return unDelivered(time, Partner);
+        return orderRepository.unDelivered(time, Partner);
     }
     String lastDelivery(String Partner){
         return orderRepository.lastDelivery(Partner);

@@ -8,17 +8,17 @@ import java.util.List;
 
 @Repository
 public class OrderRepository {
-   private HashMap<String,Order>orderHashMap=new HashMap<>();;
-   private HashMap<String,String>dpOrderMap=new HashMap<>();
-   private HashMap<String,DeliveryPartner>DPHashMap=new HashMap<>();
-   private HashMap<String, List<String>>dpOrderPair=new HashMap<>();;
+   private HashMap<String,Order>orderHashMap;;
+   private HashMap<String,String>dpOrderMap;
+   private HashMap<String,DeliveryPartner>DPHashMap;
+   private HashMap<String, List<String>>dpOrderPair;;
 
-//    public OrderRepository() {
-//        orderHashMap=new HashMap<>();
-//        dpOrderMap=new HashMap<>();
-//        DPHashMap=new HashMap<>();
-//        dpOrderPair=new HashMap<>();
-//    }
+    public OrderRepository() {
+        orderHashMap=new HashMap<>();
+        dpOrderMap=new HashMap<>();
+        DPHashMap=new HashMap<>();
+        dpOrderPair=new HashMap<>();
+    }
 
     void addOrder(Order order){
        orderHashMap.put(order.getId(),order);

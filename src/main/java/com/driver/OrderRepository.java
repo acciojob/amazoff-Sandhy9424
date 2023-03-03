@@ -98,15 +98,18 @@ public class OrderRepository {
        return hh+":"+min;
    }
    void DeletePartner(String id){
-        for(String x:dpOrderMap.keySet()){
-            if(dpOrderMap.get(x).equals(id)){
-                dpOrderMap.remove(id);
-            }
+        if(DPHashMap.containsKey(id)) {
+            DPHashMap.remove(id);
         }
-        if(DPHashMap.containsKey(id))
-       DPHashMap.remove(id);
-        if(dpOrderPair.containsKey(id))
-       dpOrderPair.remove(id);
+        if(dpOrderPair.containsKey(id)) {
+            List<String> s = new ArrayList<>(dpOrderPair.get(id));
+            for(String x:s){
+                if(dpOrderMap.containsKey(x)) {
+                    dpOrderMap.remove(x);
+                }
+            }
+            dpOrderPair.remove(id);
+        }
    }
    void DeleteOrder(String id){
         if(orderHashMap.containsKey(id))
